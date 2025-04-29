@@ -1,6 +1,6 @@
 ﻿namespace Application.Models.SubResponseModel
 {
-    public class EmployeVM
+    public class EmployeeVM
     {
         public int Id { get; set; }
         public string Name { get; set; }

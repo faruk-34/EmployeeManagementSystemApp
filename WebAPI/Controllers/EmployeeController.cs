@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Application.Interfaces;
+using Application.Models.BaseResponse;
+using Application.Models.SubRequestModel;
+using Application.Models.SubResponseModel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -7,5 +10,27 @@ namespace WebAPI.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private readonly IEmployeeService _employeeService;
+
+        public EmployeeController(IEmployeeService userService)
+        {
+            _employeeService = userService;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<Response<EmployeeVM>> Get(int id, CancellationToken cancellationToken) => await _employeeService.Get(id, cancellationToken);
+
+        [HttpPut]
+        public async Task<Response<EmployeeVM>> Update(RequestEmployee request, CancellationToken cancellationToken) => await _employeeService.Update(request, cancellationToken);
+
+        [HttpPost]
+        public async Task<Response<EmployeeVM>> Insert(RequestEmployee request, CancellationToken cancellationToken) => await _employeeService.Update(request, cancellationToken);
+
+        [HttpDelete("{id}")]
+        public async Task<Response<bool>> Delete(int id, CancellationToken cancellationToken)
+        {
+            var response = await _employeeService.Delete(id, cancellationToken);
+            return response;
+        }
     }
 }
