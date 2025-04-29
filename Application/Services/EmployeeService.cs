@@ -24,7 +24,6 @@ namespace Application.Services
             _workContext = workContext;
         }
 
-
         public async Task<Response<EmployeeVM>> Get(int id, CancellationToken cancellationToken)
         {
             var result = new Response<EmployeeVM>();

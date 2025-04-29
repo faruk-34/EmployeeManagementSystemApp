@@ -46,7 +46,7 @@ namespace Application.Services
                 }
 
 
-                bool userNameExists = await _context.Users.AnyAsync(p => p.Username == request.Username);
+                bool userNameExists = await _context.User.AnyAsync(p => p.Username == request.Username);
                 if (userNameExists)
                 {
                     result.IsSuccess = false;
@@ -54,7 +54,7 @@ namespace Application.Services
                     return result;
                 }
 
-                bool emailExists = await _context.Users.AnyAsync(p => p.Email == request.Email);
+                bool emailExists = await _context.User.AnyAsync(p => p.Email == request.Email);
                 if (emailExists)
                 {
                     result.IsSuccess = false;
@@ -70,7 +70,7 @@ namespace Application.Services
                 if (string.IsNullOrEmpty(user.PasswordHash))
                     user.PasswordHash = request.Password;
 
-                await _context.Users.AddAsync(user);
+                await _context.User.AddAsync(user);
                 await _context.SaveChangesAsync();
 
                 result.IsSuccess = true;
@@ -92,7 +92,7 @@ namespace Application.Services
                 return result;
             }
 
-            var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == request.Email);
             if (user == null)
             {
                 result.IsSuccess = false;

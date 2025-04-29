@@ -13,7 +13,13 @@ namespace Application.Mapping
             CreateMap<User, UserVM>().ReverseMap();
             CreateMap<User, RequestUser>().ReverseMap();
 
- 
+            CreateMap<Employee, EmployeeVM>().ReverseMap();
+            CreateMap<Employee, RequestEmployee>().ReverseMap();
+
+            CreateMap<Department, DepartmentVM>().ReverseMap();
+            CreateMap<Department, RequestDepartment>().ReverseMap();
+
+
         }
     }
 }

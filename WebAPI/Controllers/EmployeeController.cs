@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         public async Task<Response<EmployeeVM>> Update(RequestEmployee request, CancellationToken cancellationToken) => await _employeeService.Update(request, cancellationToken);
 
         [HttpPost]
-        public async Task<Response<EmployeeVM>> Insert(RequestEmployee request, CancellationToken cancellationToken) => await _employeeService.Update(request, cancellationToken);
+        public async Task<Response<EmployeeVM>> Insert(RequestEmployee request, CancellationToken cancellationToken) => await _employeeService.Insert(request, cancellationToken);
 
         [HttpDelete("{id}")]
         public async Task<Response<bool>> Delete(int id, CancellationToken cancellationToken)

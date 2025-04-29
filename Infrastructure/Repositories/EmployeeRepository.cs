@@ -1,10 +1,11 @@
 ﻿using Domain.Entities;
+using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class EmployeeRepository
+    public class EmployeeRepository:IEmployeeRepository
     {
         private readonly AppDbContext _context;
 
@@ -16,28 +17,28 @@ namespace Infrastructure.Repositories
 
         public async Task<Employee> Get(int id, CancellationToken cancellationToken)
         {
-            return await _context.Employees.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);    
+            return await _context.Employee.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);    
      
         }
 
-        public async Task Insert(Employee eventEntity, CancellationToken cancellationToken)
+        public async Task Insert(Employee employeeEntity, CancellationToken cancellationToken)
         {
-            await _context.Employees.AddAsync(eventEntity, cancellationToken);
+            await _context.Employee.AddAsync(employeeEntity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task Update(Employee eventEntity, CancellationToken cancellationToken)
+        public async Task Update(Employee employeeEntity, CancellationToken cancellationToken)
         {
-            _context.Employees.Update(eventEntity);
+            _context.Employee.Update(employeeEntity);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task Delete(int id, CancellationToken cancellationToken)
         {
-            var eventEntity = await _context.Employees.FindAsync(id);
-            if (eventEntity != null)
+            var employeeEntity = await _context.Employee.FindAsync(id);
+            if (employeeEntity != null)
             {
-                _context.Employees.Remove(eventEntity);
+                _context.Employee.Remove(employeeEntity);
                 await _context.SaveChangesAsync(cancellationToken);
             }
         }

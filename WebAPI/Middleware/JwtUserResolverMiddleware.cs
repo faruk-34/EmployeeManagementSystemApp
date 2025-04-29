@@ -19,11 +19,8 @@ namespace WebAPI.Middleware
             if (context.User.Identity.IsAuthenticated)
             {
                 var userId = context.User.FindFirstValue(ClaimTypes.NameIdentifier);  
-                var tenantId = context.User.FindFirstValue("TenantId");  
-
                 workContext.UserId = int.Parse(userId);
-                workContext.TenantId = int.Parse(tenantId);
-            }
+             }
 
             await _next(context);
         }
