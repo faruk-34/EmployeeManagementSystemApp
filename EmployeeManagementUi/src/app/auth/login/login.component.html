@@ -1,31 +1,38 @@
-<form #form="ngForm" (ngSubmit)="login(form)" novalidate>
-  <div class="form-group">
-    <label for="username">Kullanıcı Adı</label>
-    <input type="text"
-           id="username"
-           name="username"
-           [(ngModel)]="username"
-           required
-           #usernameModel="ngModel">
-    <div class="error" *ngIf="submitted && usernameModel.invalid">
-      Kullanıcı adı zorunludur 
-    </div>
+<div class="login-container">
+  <div class="app-title">
+    <h1>Çalışan Yönetimi</h1>
   </div>
+  <div class="login-box"> 
+    <form #form="ngForm" (ngSubmit)="login(form)" novalidate>
+      <div class="form-group">
+        <label for="username">Kullanıcı Adı</label>
+        <input type="text"
+               id="username"
+               name="username"
+               [(ngModel)]="username"
+               required
+               #usernameModel="ngModel">
+        <div class="error" *ngIf="submitted && usernameModel.invalid">
+          Kullanıcı adı zorunludur 
+        </div>
+      </div>
 
-  <div class="form-group">
-    <label for="password">Şifre</label>
-    <input type="password"
-           id="password"
-           name="password"
-           [(ngModel)]="password"
-           required
-           #passwordModel="ngModel">
-    <div class="error" *ngIf="submitted && passwordModel.invalid">
-      Şifre zorunludur
-    </div>
+      <div class="form-group">
+        <label for="password">Şifre</label>
+        <input type="password"
+               id="password"
+               name="password"
+               [(ngModel)]="password"
+               required
+               #passwordModel="ngModel">
+        <div class="error" *ngIf="submitted && passwordModel.invalid">
+          Şifre zorunludur
+        </div>
+      </div>
+
+      
+      <button type="submit">Giriş Yap</button>
+    </form>
   </div>
-
-  
-  <button type="submit">Login</button>
-</form>
+</div>
 

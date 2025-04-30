@@ -10,7 +10,10 @@
           <input [(ngModel)]="department.name" name="name" class="form-control" required />
         </div>
 
-        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-secondary" (click)="cancel()">İptal</button>
+        </div>
       </form>
     </div>
   </div>

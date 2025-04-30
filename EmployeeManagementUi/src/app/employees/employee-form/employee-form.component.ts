@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './employee-form.component.html'
 })
 export class EmployeeFormComponent implements OnInit {
-  employee: Employee = { id: 0, firstname: '',  lastname:'',  email: '', departmentId: 0 };
+  employee: Employee = { id: 0, firstName: '',  lastName:'',  email: '', departmentId: 0 };
   departments: Department[] = [];
 
   constructor(
@@ -27,10 +27,10 @@ export class EmployeeFormComponent implements OnInit {
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.depService.getAll().subscribe(deps => this.departments = deps);
+    this.depService.getAll().subscribe(deps => this.departments = deps.data);
 
     if (id) {
-      this.empService.Get(id).subscribe(emp => this.employee = emp); // Corrected method name
+      this.empService.Get(id).subscribe(emp => this.employee = emp.data); // Corrected method name
     }
   }
 
@@ -38,7 +38,11 @@ export class EmployeeFormComponent implements OnInit {
     if (this.employee.id === 0) {
       this.empService.Insert(this.employee).subscribe(() => this.router.navigate(['/employees'])); // Corrected method name
     } else {
-      this.empService.Update(this.employee.id, this.employee).subscribe(() => this.router.navigate(['/employees'])); // Corrected method name
+      this.empService.Update(  this.employee).subscribe(() => this.router.navigate(['/employees'])); // Corrected method name
     }
+  }
+
+  cancel() {
+    this.router.navigate(['/employees']);
   }
 }

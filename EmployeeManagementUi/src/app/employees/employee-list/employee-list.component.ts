@@ -19,9 +19,12 @@ export class EmployeeListComponent implements OnInit {
 
   constructor(private empService: EmployeeService, private depService: DepartmentService) { }
 
-  ngOnInit(): void {
-    this.empService.getAll().subscribe(data => this.employees = data);
-    this.depService.getAll().subscribe(data => this.departments = data);
+  ngOnInit(): void { 
+    this.empService.getAll().subscribe(response => {
+      this.employees = response.data;
+    });
+
+    this.depService.getAll().subscribe(data => this.departments = data.data);
   }
   
   getDepartmentName(departmentId: number): string {

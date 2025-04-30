@@ -24,7 +24,7 @@ export class DepartmentFormComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     if (id) {
       this.depService.getById(id).subscribe(dep => {
-        if (dep) this.department = dep;
+        if (dep) this.department = dep.data;
       });
     }
   }
@@ -33,7 +33,11 @@ export class DepartmentFormComponent implements OnInit {
     if (this.department.id === 0) {
       this.depService.Insert(this.department).subscribe(() => this.router.navigate(['/departments']));
     } else {
-      this.depService.Update(this.department.id, this.department).subscribe(() => this.router.navigate(['/departments']));
+      this.depService.Update(  this.department).subscribe(() => this.router.navigate(['/departments']));
     }
+  }
+
+  cancel() {
+    this.router.navigate(['/departments']);
   }
 }

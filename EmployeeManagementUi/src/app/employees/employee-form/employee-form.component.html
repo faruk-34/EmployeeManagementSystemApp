@@ -1,4 +1,4 @@
- <div class="container mt-5">
+<div class="container mt-5">
   <div class="card">
     <div class="card-header">
       <h3>{{ employee.id === 0 ? 'Yeni Çalışan Ekle' : 'Çalışan Düzenle' }}</h3>
@@ -7,12 +7,12 @@
       <form (ngSubmit)="save()">
         <div class="mb-3">
           <label class="form-label">Ad</label>
-          <input [(ngModel)]="employee.firstname" name="name" class="form-control" required />
+          <input [(ngModel)]="employee.firstName" name="firstName" class="form-control" required />
         </div>
 
         <div class="mb-3">
           <label class="form-label">Soyad</label>
-          <input [(ngModel)]="employee.lastname" name="name" class="form-control" required />
+          <input [(ngModel)]="employee.lastName" name="lastName" class="form-control" required />
         </div>
 
         <div class="mb-3">
@@ -27,7 +27,10 @@
           </select>
         </div>
 
-        <button type="submit" class="btn btn-primary">Kaydet</button>
+        <div class="d-flex gap-2">
+          <button type="submit" class="btn btn-primary">Kaydet</button>
+          <button type="button" class="btn btn-secondary" (click)="cancel()">İptal</button>
+        </div>
       </form>
     </div>
   </div>

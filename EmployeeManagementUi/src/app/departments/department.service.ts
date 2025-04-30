@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Department } from '../models/department';
 import { environment } from '../../environments/environment';
+import { ApiResponse } from '../models/ApiResponse';
 
 @Injectable({ providedIn: 'root' })
 export class DepartmentService {
@@ -11,20 +12,20 @@ export class DepartmentService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<Department[]> {
-    return this.http.get<Department[]>(this.baseUrl);
+  getAll(): Observable<ApiResponse<Department[]>> {
+    return this.http.get<ApiResponse<Department[]>>(this.baseUrl);
   }
 
-    getById(id: number): Observable<Department> {
-      return this.http.get<Department>(`${this.baseUrl}/${id}`);
+    getById(id: number): Observable<ApiResponse<Department>> {
+      return this.http.get<ApiResponse<Department>>(`${this.baseUrl}/${id}`);
     }
 
   Insert(dep: Department) {
     return this.http.post(this.baseUrl, dep);
   }
 
-  Update(id: number, dep: Department) {
-    return this.http.put(`${this.baseUrl}/${id}`, dep);
+  Update(  dep: Department) {
+    return this.http.put( this.baseUrl, dep);
   }
 
   Delete(id: number) {

@@ -17,7 +17,7 @@ export class DepartmentListComponent implements OnInit {
   constructor(private depService: DepartmentService) {}
 
   ngOnInit(): void {
-    this.depService.getAll().subscribe(data => this.departments = data);
+    this.depService.getAll().subscribe(data => this.departments = data.data);
   }
 
   delete(id: number) {

@@ -5,7 +5,7 @@
   </div>
 
   <table class="table table-bordered table-hover">
-    <thead class="table-dark">
+    <thead>
       <tr>
         <th>#</th>
         <th>Ad</th>
@@ -18,8 +18,8 @@
     <tbody>
       <tr *ngFor="let emp of employees; let i = index">
         <td>{{ i + 1 }}</td>
-        <td>{{ emp.firstname }}</td>
-        <td>{{ emp.lastname }}</td>
+        <td>{{ emp.firstName }}</td>
+        <td>{{ emp.lastName }}</td>
         <td>{{ emp.email }}</td>
         <td>{{ getDepartmentName(emp.departmentId) }}</td>
         <td>
