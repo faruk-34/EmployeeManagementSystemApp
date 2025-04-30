@@ -50,6 +50,16 @@ namespace Application.Services
             return result;
         }
 
+        public async Task<Response<List<DepartmentVM>>> GetAll(CancellationToken cancellationToken)
+        {
+            var result = new Response<List<DepartmentVM>>();
+
+            var events = await _departmentRepository.GetAll(cancellationToken);
+            result.IsSuccess = true;
+            result.Data = _mapper.Map<List<DepartmentVM>>(events);
+            return result;
+        }
+
         public async Task<Response<DepartmentVM>> Insert(RequestDepartment request, CancellationToken cancellationToken)
         {
             var result = new Response<DepartmentVM>();

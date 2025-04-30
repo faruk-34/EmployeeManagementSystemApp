@@ -1,0 +1,34 @@
+ <div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <h3>{{ employee.id === 0 ? 'Yeni Çalışan Ekle' : 'Çalışan Düzenle' }}</h3>
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="save()">
+        <div class="mb-3">
+          <label class="form-label">Ad</label>
+          <input [(ngModel)]="employee.firstname" name="name" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Soyad</label>
+          <input [(ngModel)]="employee.lastname" name="name" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input [(ngModel)]="employee.email" name="email" type="email" class="form-control" required />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Departman</label>
+          <select [(ngModel)]="employee.departmentId" name="departmentId" class="form-select" required>
+            <option *ngFor="let dep of departments" [value]="dep.id">{{ dep.name }}</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kaydet</button>
+      </form>
+    </div>
+  </div>
+</div>

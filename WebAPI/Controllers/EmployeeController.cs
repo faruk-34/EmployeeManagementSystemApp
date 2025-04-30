@@ -20,6 +20,9 @@ namespace WebAPI.Controllers
         [HttpGet("{id}")]
         public async Task<Response<EmployeeVM>> Get(int id, CancellationToken cancellationToken) => await _employeeService.Get(id, cancellationToken);
 
+        [HttpGet()]  
+        public async Task<Response<List<EmployeeVM>>> GetAll( CancellationToken cancellationToken) => await _employeeService.GetAll(cancellationToken);
+
         [HttpPut]
         public async Task<Response<EmployeeVM>> Update(RequestEmployee request, CancellationToken cancellationToken) => await _employeeService.Update(request, cancellationToken);
 

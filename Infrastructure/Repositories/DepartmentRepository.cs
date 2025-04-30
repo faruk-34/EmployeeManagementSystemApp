@@ -13,12 +13,18 @@ namespace Infrastructure.Repositories
         {
             _context = context;
         }
-
-
+ 
         public async Task<Department> Get(int id, CancellationToken cancellationToken)
         {
             return await _context.Department.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);
 
+        }
+
+        public async Task<List<Department>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _context.Department
+                .Where(r => !r.IsDeleted)
+                .ToListAsync();
         }
 
         public async Task Insert(Department departmentEntity, CancellationToken cancellationToken)

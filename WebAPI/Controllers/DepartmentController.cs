@@ -2,6 +2,7 @@
 using Application.Models.BaseResponse;
 using Application.Models.SubRequestModel;
 using Application.Models.SubResponseModel;
+using Application.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -19,6 +20,10 @@ namespace WebAPI.Controllers
 
         [HttpGet("{id}")]
         public async Task<Response<DepartmentVM>> Get(int id, CancellationToken cancellationToken) => await _departmentService.Get(id, cancellationToken);
+
+        [HttpGet()]
+        public async Task<Response<List<DepartmentVM>>> GetAll(CancellationToken cancellationToken) => await _departmentService.GetAll(cancellationToken);
+
 
         [HttpPut]
         public async Task<Response<DepartmentVM>> Update(RequestDepartment request, CancellationToken cancellationToken) => await _departmentService.Update(request, cancellationToken);

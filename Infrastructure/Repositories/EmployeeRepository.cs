@@ -2,6 +2,7 @@
 using Domain.Interfaces;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace Infrastructure.Repositories
 {
@@ -19,6 +20,13 @@ namespace Infrastructure.Repositories
         {
             return await _context.Employee.FirstOrDefaultAsync(e => e.Id == id, cancellationToken);    
      
+        }
+
+        public async Task<List<Employee>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _context.Employee
+                .Where(r => !r.IsDeleted)
+                .ToListAsync();
         }
 
         public async Task Insert(Employee employeeEntity, CancellationToken cancellationToken)

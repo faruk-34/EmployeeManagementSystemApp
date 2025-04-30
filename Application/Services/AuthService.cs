@@ -92,7 +92,7 @@ namespace Application.Services
                 return result;
             }
 
-            var user = await _context.User.FirstOrDefaultAsync(u => u.Email == request.Email);
+            var user = await _context.User.FirstOrDefaultAsync(u => u.Username == request.Username);
             if (user == null)
             {
                 result.IsSuccess = false;

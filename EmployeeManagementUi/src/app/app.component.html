@@ -1,0 +1,17 @@
+<header class="header" *ngIf="isLoggedIn | async"> 
+  <nav class="navbar">
+    <div class="nav-brand">Çalışan Yönetimi</div>
+    <div class="nav-links">
+      <a routerLink="/employees" routerLinkActive="active">Çalışanlar</a>
+      <a routerLink="/departments" routerLinkActive="active">Departmanlar</a>
+    </div>
+    <button class="logout-btn" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+      Çıkış
+    </button>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

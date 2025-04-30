@@ -7,6 +7,7 @@ using Domain.Entities;
 using Domain.Interfaces;
 using Infrastructure;
 using Infrastructure.Context;
+using StackExchange.Redis;
 
 namespace Application.Services
 {
@@ -47,6 +48,16 @@ namespace Application.Services
                 result.IsSuccess = false;
                 result.ErrorMessage = ex.Message;
             }
+            return result;
+        }
+
+        public async Task<Response<List<EmployeeVM>>> GetAll(CancellationToken cancellationToken)
+        {
+            var result = new Response<List<EmployeeVM>>();
+
+            var events = await _employeeRepository.GetAll(cancellationToken);
+            result.IsSuccess = true;
+            result.Data = _mapper.Map<List<EmployeeVM>>(events);
             return result;
         }
 
