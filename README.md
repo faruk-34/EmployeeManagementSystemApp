@@ -25,10 +25,7 @@ src/
 
 ### 1. Veritabanı Kurulumu
 - `appsettings.json` dosyasında bağlantı dizesini yapılandırın.
-- Entity Framework kullanılarak migration ve veritabanı oluşturulabilir:
-  ```bash
-  dotnet ef database update
-  ```
+
 
 ### 2. Backend Çalıştırma
 ```bash
@@ -43,7 +40,6 @@ npm install
 ng serve
 ```
 
-Uygulama Angular için `http://localhost:4200`, API için `http://localhost:5000` üzerinde çalışacaktır.
 
 ## 👥 Özellikler
 
