@@ -44,7 +44,7 @@ ng serve
 ## 👥 Özellikler
 
 - Kullanıcı kimlik doğrulama (login)
-- Çalışan ekleme, düzenleme, silme
+- Çalışan yönetimi
 - Departman yönetimi
-- Guard kontrolleri
-- Global exception handler
+
+
