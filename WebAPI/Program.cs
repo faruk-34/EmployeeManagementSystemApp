@@ -110,8 +110,7 @@ builder.Services.AddAutoMapper(typeof(MappingProfile));
 // Dependency Injection (DI) kayýtlarý
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IUserRepository, UsersRepository>();
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();

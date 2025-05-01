@@ -84,7 +84,7 @@ namespace Infrastructure.Context
     });
 
             // Global query filters
-            // modelBuilder.ApplyQueryFilter<IMultiTenant>(t => t.TenantId == _workContext.TenantId);
+         
             modelBuilder.ApplyQueryFilter<ISoftDeletable>(t => t.IsDeleted == false);
         }
     }

@@ -15,7 +15,7 @@ namespace Application.Services
     public class AuthService : IAuthService
     {
         private readonly AppDbContext _context;
-         private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IWorkContext _workContext;
 
@@ -24,7 +24,7 @@ namespace Application.Services
              AppDbContext context,
              IJwtTokenGenerator jwtTokenGenerator, IWorkContext workContext)
         {
-             _mapper = mapper;
+            _mapper = mapper;
             _jwtTokenGenerator = jwtTokenGenerator;
             _context = context;
             _workContext = workContext;
@@ -34,48 +34,48 @@ namespace Application.Services
         {
             var result = new Response<UserVM>();
 
-            
-                RegisterRequestValidator validator = new RegisterRequestValidator(); // Fluent Validation
-                ValidationResult validationResult = validator.Validate(request);
 
-                if (!validationResult.IsValid)
-                {
-                    result.IsSuccess = false;
-                    result.ErrorMessage = string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage));
-                    return result;
-                }
+            RegisterRequestValidator validator = new RegisterRequestValidator(); // Fluent Validation
+            ValidationResult validationResult = validator.Validate(request);
+
+            if (!validationResult.IsValid)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = string.Join(" | ", validationResult.Errors.Select(e => e.ErrorMessage));
+                return result;
+            }
 
 
-                bool userNameExists = await _context.User.AnyAsync(p => p.Username == request.Username);
-                if (userNameExists)
-                {
-                    result.IsSuccess = false;
-                    result.ErrorMessage = "Kullanıcı adı daha önce kayıt edilmiş";
-                    return result;
-                }
+            bool userNameExists = await _context.User.AnyAsync(p => p.Username == request.Username);
+            if (userNameExists)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "Kullanıcı adı daha önce kayıt edilmiş";
+                return result;
+            }
 
-                bool emailExists = await _context.User.AnyAsync(p => p.Email == request.Email);
-                if (emailExists)
-                {
-                    result.IsSuccess = false;
-                    result.ErrorMessage = "Email adresi daha önce kayıt edilmiş!";
-                    return result;
-                }
+            bool emailExists = await _context.User.AnyAsync(p => p.Email == request.Email);
+            if (emailExists)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "Email adresi daha önce kayıt edilmiş!";
+                return result;
+            }
 
-                // Şifre  hashleniyor
-                request.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
+            // Şifre  hashleniyor
+            request.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
 
-                User user = _mapper.Map<User>(request);
- 
-                if (string.IsNullOrEmpty(user.PasswordHash))
-                    user.PasswordHash = request.Password;
+            User user = _mapper.Map<User>(request);
 
-                await _context.User.AddAsync(user);
-                await _context.SaveChangesAsync();
+            if (string.IsNullOrEmpty(user.PasswordHash))
+                user.PasswordHash = request.Password;
 
-                result.IsSuccess = true;
-                result.ErrorMessage = "Kullanıcı başarıyla kaydedildi!";
-   
+            await _context.User.AddAsync(user);
+            await _context.SaveChangesAsync();
+
+            result.IsSuccess = true;
+            result.ErrorMessage = "Kullanıcı başarıyla kaydedildi!";
+
             return result;
         }
         public async Task<Response<LoginVM>> Login(RequestLogin request, CancellationToken cancellationToken)
