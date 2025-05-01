@@ -6,17 +6,19 @@ import { DepartmentService } from '../../departments/department.service';
 import { Employee } from '../../models/employee';
 import { Department } from '../../models/department';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-employee-form',
   standalone: true, // Marked as standalone
   imports: [CommonModule, FormsModule], // Added necessary modules
-  templateUrl: './employee-form.component.html'
+  templateUrl: './employee-form.component.html',
+  styleUrls: ['./employee-form.component.css']
 })
 export class EmployeeFormComponent implements OnInit {
   employee: Employee = { id: 0, firstName: '',  lastName:'',  email: '', departmentId: 0 };
   departments: Department[] = [];
+  isSubmitted = false;
 
   constructor(
     private empService: EmployeeService,
@@ -34,11 +36,17 @@ export class EmployeeFormComponent implements OnInit {
     }
   }
 
-  save() {
+  save(form: NgForm) {
+    this.isSubmitted = true;
+    
+    if (form.invalid) {
+      return;
+    }
+    
     if (this.employee.id === 0) {
-      this.empService.Insert(this.employee).subscribe(() => this.router.navigate(['/employees'])); // Corrected method name
+      this.empService.Insert(this.employee).subscribe(() => this.router.navigate(['/employees']));
     } else {
-      this.empService.Update(  this.employee).subscribe(() => this.router.navigate(['/employees'])); // Corrected method name
+      this.empService.Update(this.employee).subscribe(() => this.router.navigate(['/employees']));
     }
   }
 

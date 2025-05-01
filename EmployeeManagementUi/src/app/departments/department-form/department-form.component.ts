@@ -3,7 +3,7 @@ import { DepartmentService } from '../department.service';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { Department } from '../../models/department';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-department-form',
@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class DepartmentFormComponent implements OnInit {
   department: Department = { id: 0, name: '' };
+  isSubmitted = false;
 
   constructor(
     private depService: DepartmentService,
@@ -29,11 +30,17 @@ export class DepartmentFormComponent implements OnInit {
     }
   }
 
-  save() {
+  save(form: NgForm) {
+    this.isSubmitted = true;
+    
+    if (form.invalid) {
+      return;
+    }
+    
     if (this.department.id === 0) {
       this.depService.Insert(this.department).subscribe(() => this.router.navigate(['/departments']));
     } else {
-      this.depService.Update(  this.department).subscribe(() => this.router.navigate(['/departments']));
+      this.depService.Update(this.department).subscribe(() => this.router.navigate(['/departments']));
     }
   }
 
